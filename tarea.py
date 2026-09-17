@@ -104,6 +104,17 @@ class Tarea:
         else:
             return "Sin prisa"
 
+    @classmethod
+    def desde_dict(cls, datos: dict) -> "Tarea":
+        return cls(
+            titulo=datos["titulo"],
+            descripcion=datos["descripcion"],
+            prioridad=datos["prioridad"],
+            estado=datos["estado"],
+            dias_restantes=datos["dias_restantes"],
+            tag=datos.get("tag", ""),
+        )
+
     def __str__(self):
         fecha = self._ultima_modificacion.strftime("%d/%m/%Y %H:%M:%S")
         etiqueta = f" #{self.tag}" if self.tag else ""
