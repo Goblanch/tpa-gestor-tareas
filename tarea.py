@@ -103,3 +103,11 @@ class Tarea:
             return "Próxima"
         else:
             return "Sin prisa"
+
+    def __str__(self):
+        fecha = self._ultima_modificacion.strftime("%d/%m/%Y %H:%M:%S")
+        etiqueta = f" #{self.tag}" if self.tag else ""
+        return (f"[{self.clasificacion_dias}] {self.titulo}{etiqueta} "
+                f"(prioridad: {self.clasificacion_prioridad}, estado: {self.estado}, "
+                f"faltan {self.dias_restantes} días, "
+                f"modificada: {fecha})")
