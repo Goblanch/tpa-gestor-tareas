@@ -1,6 +1,6 @@
 class Tarea:
 
-    PRIORIDADES_VALIDAS = ("baja", "media", "alta", "urgente")
+    PRIORIDADES_VALIDAS = ("urgente", "alta", "media/alta", "media", "baja")
     ESTADOS_VALIDOS = ("pendiente", "en curso", "finalizada")
 
     def __init__(self, titulo: str, descripcion : str, prioridad : int, estado : str, dias_restantes: int):
@@ -62,6 +62,11 @@ class Tarea:
     def clasificacion_dias(self):
         """Propiedad calculada a partir de días restantes (Urgente, Próxima o Sin prisa)"""
         return Tarea._clasificar_por_dias(self._dias_restantes)
+
+    @property
+    def clasificacion_prioridad(self):
+        return Tarea.PRIORIDADES_VALIDAS[self.prioridad - 1]
+
 
     @staticmethod
     def _clasificar_por_dias(dias: int) -> str:
