@@ -67,14 +67,14 @@ class GestorTareasCLI:
     def opcion_buscar_lista(gestor: GestorTareas) -> None:
         titulo = str(input("\nTítulo a buscar: "))
         tarea = gestor.buscar_por_nombre(titulo)
-        print(tarea if tarea else "    -> No encontrada")
+        print(tarea if tarea else f"    -> [ERROR] Tarea {titulo} no existe")
 
     @staticmethod
     def opcion_buscar_dict(gestor: GestorTareas) -> None:
         titulo = str(input("\nTítulo a buscar: "))
         tareas_dict = gestor.a_dict()
         tarea = tareas_dict.get(titulo)
-        print(tarea if tarea else "    -> No encontrada")
+        print(tarea if tarea else f"    -> [ERROR] Tarea {titulo} no existe")
 
     @staticmethod
     def opcion_mostrar_tarea(gestor: GestorTareas) -> None:
