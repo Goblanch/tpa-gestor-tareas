@@ -119,6 +119,22 @@ class GestorTareasCLI:
         print(f"    -> [SUCCESS] Copia {'profunda' if profunda else 'superficual'} añadida como '{copia.titulo}'")
 
     @staticmethod
+    def poblar_lista_tareas_prueba(gestor : GestorTareas) -> None:
+        t1 = Tarea("Correr", "Salir a correr", 4, "pendiente", 1, "lifestyle")
+        t2 = Tarea("Estudiar", "Estudiar estadística", 2, "finalizada", 3, "estudios")
+        t3 = Tarea("Trabajo TPA", "Entregar trabajo tpa", 1, "en curso", 1, "estudios")
+        t4 = Tarea("Arreglar papeles", "Arreglar papeles del coche", 3, "pendiente", 6)
+        t5 = Tarea("Lavar coche", "Ir a lavar el coche antes del viaje", 5, "pendiente", 10)
+        t6 = Tarea("Entrevista trabajo", "Preparar entrevista", 1, "en curso", 1, "work")
+
+        gestor.agregar_tarea(t1)
+        gestor.agregar_tarea(t2)
+        gestor.agregar_tarea(t3)
+        gestor.agregar_tarea(t4)
+        gestor.agregar_tarea(t5)
+        gestor.agregar_tarea(t6)
+
+    @staticmethod
     def mainloop():
         gestor = GestorTareas()
         acciones = {
@@ -144,6 +160,8 @@ class GestorTareasCLI:
                 GestorTareasCLI.opcion_copiar(gestor, profunda=False)
             elif opcion == "9":
                 GestorTareasCLI.opcion_copiar(gestor, profunda=True)
+            elif opcion == "/poblar_lista":
+                GestorTareasCLI.poblar_lista_tareas_prueba(gestor)
             else:
                 print("    -> [ERROR] Opción no válida, prueba de nuevo")
 
