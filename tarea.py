@@ -92,14 +92,14 @@ class Tarea:
     def ultima_modificacion(self):
         return self._ultima_modificacion
 
-    def esta_completada(self) -> bool:
-        return self._estado == "completada"
+    def esta_finalizada(self) -> bool:
+        return self._estado == "finalizada"
 
     def completar(self) -> None:
-        if self.esta_completada():
-            raise ValueError("[ERROR] La tarea ya está completada")
+        if self.esta_finalizada():
+            raise ValueError("[ERROR] La tarea ya está finalizada")
 
-        self._estado = "completada"
+        self._estado = "finalizada"
 
     def _marcar_modificada(self):
         self._ultima_modificacion = datetime.now()

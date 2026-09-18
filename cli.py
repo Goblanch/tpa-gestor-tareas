@@ -16,7 +16,7 @@ class GestorTareasCLI:
         print("4. Buscar tarea (dict)")
         print("5. Mostrar tarea")
         print("6. Mostrar lista de tareas")
-        print("7. Marcar tarea como completada")
+        print("7. Marcar tarea como finalizada")
         print("8. Copiar tarea (superficial)")
         print("9. Copiar tarea (profunda)")
         print("0. Salir")
@@ -88,7 +88,7 @@ class GestorTareasCLI:
 
     @staticmethod
     def opcion_completar(gestor: GestorTareas) -> None:
-        titulo = str(input("\nTítulo de la tarea a completar: "))
+        titulo = str(input("\nTítulo de la tarea a finalizar: "))
         tarea = gestor.buscar_por_nombre(titulo)
         if tarea is None:
             print("    -> [ERROR] Tarea no encontrada")
@@ -96,9 +96,9 @@ class GestorTareasCLI:
 
         try:
             tarea.completar()
-            print(f"    -> [SUCCESS] Tarea '{titulo}' marcada como completada")
+            print(f"    -> [SUCCESS] Tarea '{titulo}' marcada como finalizada")
         except ValueError as e:
-            print(f"    -> [ERROR] No se pudo completar la tarea: {e}")
+            print(f"    -> [ERROR] No se pudo finalizar la tarea: {e}")
 
     @staticmethod
     def opcion_copiar(gestor: GestorTareas, profunda: bool) -> None:
