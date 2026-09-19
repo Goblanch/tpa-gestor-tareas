@@ -12,7 +12,7 @@ class GestorArchivo:
                 linea = GestorArchivo.SEPARADOR.join([
                     tarea.titulo,
                     tarea.descripcion,
-                    tarea.prioridad,
+                    str(tarea.prioridad),
                     tarea.estado,
                     str(tarea.dias_restantes),
                     tarea.tag,
@@ -43,9 +43,9 @@ class GestorArchivo:
                     tarea = Tarea(
                         titulo=titulo,
                         descripcion=descripcion,
-                        prioridad=prioridad,
+                        prioridad=int(prioridad),
                         estado=estado,
-                        dias_restantes=dias_restantes,
+                        dias_restantes=int(dias_restantes),
                         tag=tag,
                     )
                     tarea._ultima_modificacion = datetime.fromisoformat(ultima_mod)
