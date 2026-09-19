@@ -1,6 +1,29 @@
-__pycache__/tarea.cpython-313.pyc
-test.py
-__pycache__/tarea.cpython-313.pyc
-__pycache__/gestor_tareas.cpython-313.pyc
-__pycache__/cli.cpython-313.pyc
-__pycache__/gestor_archivo.cpython-313.pyc
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Distribución / empaquetado
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Cachés de herramientas
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Configuración de editores/IDEs
+.vscode/
+.idea/
+
+# --- Proyecto: listas de tareas guardadas ---
+*.txt
