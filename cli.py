@@ -1,5 +1,6 @@
 from tarea import Tarea
 from gestor_tareas import GestorTareas
+from gestor_archivo import GestorArchivo
 
 class GestorTareasCLI:
     def __init__(self):
@@ -10,15 +11,17 @@ class GestorTareasCLI:
         print("\n" + "=" * 50)
         print("     # GESTOR DE TAREAS #")
         print("=" * 50)
-        print("1. Añadir tarea")
-        print("2. Eliminar tarea")
-        print("3. Buscar tarea (lista)")
-        print("4. Buscar tarea (dict)")
-        print("5. Mostrar tarea")
-        print("6. Mostrar lista de tareas")
-        print("7. Marcar tarea como finalizada")
-        print("8. Copiar tarea (superficial)")
-        print("9. Copiar tarea (profunda)")
+        print("1.  Añadir tarea")
+        print("2.  Eliminar tarea")
+        print("3.  Buscar tarea (lista)")
+        print("4.  Buscar tarea (dict)")
+        print("5.  Mostrar tarea")
+        print("6.  Mostrar lista de tareas")
+        print("7.  Marcar tarea como finalizada")
+        print("8.  Copiar tarea (superficial)")
+        print("9.  Copiar tarea (profunda)")
+        print("10. Guardar tareas en archivo")
+        print("11. Cargar tareas desde archivo")
         print("0. Salir")
         print("-" * 50)
 
@@ -119,6 +122,46 @@ class GestorTareasCLI:
         print(f"    -> [SUCCESS] Copia {'profunda' if profunda else 'superficual'} añadida como '{copia.titulo}'")
 
     @staticmethod
+    def opcion_guardar(gestor: GestorTareas) -> None:
+        ruta = input("\nRuta del archivo (Enter = 'tareas.txt'): ").strip()
+        if not ruta:
+            ruta = 'tareas.txt'
+
+        try:
+            GestorArchivo.guardar_tareas(gestor, ruta)
+            print(f"    -> [SUCCESS] Tareas guardadas en '{ruta}'")
+        except OSError as e:
+            print(f"    -> [ERROR] No se pudo guardar el archivo: {e}.")
+
+    @staticmethod
+    def opcion_cargar(gestor: GestorArchivo) -> None:
+        ruta = input("\nRuta del archivo (Enter = 'tareas.txt): ").strip()
+        if not ruta:
+            ruta = 'tareas.txt'
+
+        try:
+            gestor_cargado = GestorArchivo.cargar_tareas(ruta)
+        except FileNotFoundError:
+            print("    -> [ERROR] No existe el archivo '{ruta}'")
+            return
+        except OSError as e:
+            print(f"    -> [ERROR] No se puede leer el archivo: {e}")
+            return
+
+        agregadas = 0
+        omitidas = 0
+
+        for tarea in gestor_cargado._tareas:
+            try:
+                gestor.agregar_tarea(tarea)
+                agregadas += 1
+            except ValueError:
+                #Título duplicado. GestorTareas lanza ValueError si el título está duplicado
+                omitidas += 1
+
+        print(f"    -> [SUCCESS] {agregadas} tarea(s) añadidas, {omitidas} omitida(s) por título duplicado")
+
+    @staticmethod
     def poblar_lista_tareas_prueba(gestor : GestorTareas) -> None:
         t1 = Tarea("Correr", "Salir a correr", 4, "pendiente", 1, "lifestyle")
         t2 = Tarea("Estudiar", "Estudiar estadística", 2, "finalizada", 3, "estudios")
@@ -145,6 +188,8 @@ class GestorTareasCLI:
             "5": GestorTareasCLI.opcion_mostrar_tarea,
             "6": GestorTareasCLI.opcion_mostrar_lista_tareas,
             "7": GestorTareasCLI.opcion_completar,
+            "10": GestorTareasCLI.opcion_guardar,
+            "11": GestorTareasCLI.opcion_cargar
         }
 
         while True:
