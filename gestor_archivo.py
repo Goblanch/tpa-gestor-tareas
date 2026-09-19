@@ -12,7 +12,7 @@ class GestorArchivo:
                 linea = GestorArchivo.SEPARADOR.join([
                     tarea.titulo,
                     tarea.descripcion,
-                    tarea.prioidad,
+                    tarea.prioridad,
                     tarea.estado,
                     str(tarea.dias_restantes),
                     tarea.tag,
